@@ -10,14 +10,16 @@ function makeDirty() {
 function makeClean() {
   $("#save").removeClass("btn-warning").addClass("btn-success").children("i").removeClass("fa-save").addClass("fa-check");
   $("#save span").text("Saved");
-  // saved = true;  
+  // saved = true;
 }
 
 function saveOptions(e) {
+  if (debug) { console.log("save fire"); }
   e.preventDefault;
-  console.log("ping");
   var blacklist = $("#website-blacklist").val().replace(/\s+/g, "").toLowerCase().split(",");
   var replacements = [];
+  var analytics = $('#analytics input').prop('checked');
+  var analyticsUrl = $("#analytics-url").val();
   var originals = $('#replacements [name="origin"]');
   var replaces = $('#replacements [name="replace"]');
   for (var i = ((Math.max(originals.length, replaces.length)) - 1); i >= 0; i--) {
@@ -30,7 +32,9 @@ function saveOptions(e) {
   };
   chrome.storage.sync.set({
       "blacklist": blacklist,
-      "replacements": replacements
+      "replacements": replacements,
+      "analytics": analytics ? "enabled" : "disabled",
+      "analytics_url": analyticsUrl
     },
     function() {
       makeClean();
@@ -41,19 +45,23 @@ function saveOptions(e) {
 function reset(){
     chrome.storage.sync.set({
       "blacklist": default_blacklisted_sites,
-      "replacements": default_replacements
+      "replacements": default_replacements,
+      "analytics": default_analytics,
+      "analytics_url": default_analytics_url
     },
     function() {
       makeClean();
       populateSettings();
     }
-  ); 
+  );
 }
 
 function populateSettings() {
   $("#replacements").empty();
   $("blacklist input").val("");
   chrome.storage.sync.get(null, function(result) {
+    $("#analytics input").prop("checked", result["analytics"] === "enabled");
+    $("#analytics-url").val(result["analytics_url"])
     $("#blacklist input").val(result["blacklist"].join(", "));
     var replacements = result['replacements'];
     for (var i = 0; i < replacements.length; i++) {
@@ -99,9 +107,11 @@ $(document).ready(function() {
   $("#blacklist").keypress(function(e) {
     if (e.which == 13) {
       e.preventDefault();
-      save_options(e);
+      saveOptions(e);
     }
   });
+
+  $("#analytics").on('click', saveOptions);
 
   $("#options").on('input', saveOptions);
 

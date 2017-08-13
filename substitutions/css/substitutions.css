@@ -1,12 +1,4 @@
 
-@font-face {
-
-    font-family: "xkcd";
-
-    src: url("../fonts/xkcd.otf") format("opentype");
-
-}
-
 .title {
 
     width: 100%;
@@ -19,7 +11,7 @@
 
 body, h1, h3, button, .btn {
 
-    font-family: "xkcd";
+    font-family: "Helvetica Neue";
 
     word-spacing: 2px;
 

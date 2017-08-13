@@ -1,14 +1,33 @@
-xkcd-substitutions
+Put back blacklisted climate change phrases
 ==================
 
-xkcd substitutions chrome extension
+Put back climate change phrases that the Trump administration has blacklisted https://www.theguardian.com/environment/2017/aug/07/usda-climate-change-language-censorship-emails.
 
-All credit to XKCD.  
-https://xkcd.com/1288/
-https://xkcd.com/1625/
+You can deploy your own analytics instance if you want https://github.com/buren/climate-change-substitutions-analytics/.
 
-some other xkcd jokes have made it into the newest version.
-https://xkcd.com/1004/
-https://xkcd.com/1418/
-https://xkcd.com/1031/
-https://xkcd.com/1625/
+## Analytics
+
+:information_source: __Default is opt-in__.
+
+You can optionally configure analytics.
+
+- Turn if on/off
+- Use the default analytics address
+- Deploy your own instance of this app https://github.com/buren/climate-change-substitutions-analytics/.
+- Build your own, see the request payload format below
+
+If activated the extension will post replacements stats to the configured URL.
+
+`POST /<optional-path>`
+
+__Payload__:
+
+```json
+{
+  "replacements": [{
+    "url": "http://example.com",
+    "original": "some phrase",
+    "replacement": "my phrase"
+  }]
+}
+```

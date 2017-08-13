@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Configuration page for the xkcd substitution chrome extension.">
-    <title>XKCD Substitutions Configuration</title>
+    <meta name="description" content="Configuration page for the Climate change word substitution chrome extension.">
+    <title>Climate Change Word Substitutions Configuration</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css">
@@ -19,7 +19,7 @@
 <body class="col-xs-10 col-xs-offset-1">
     <div class="heading">
         <div class="title">
-            <h1>XKCD Substitutions</h1>
+            <h1>Climate Change Word Substitutions</h1>
         </div>
         <ul class="nav nav-pills nav-justified">
             <li>
@@ -48,6 +48,27 @@
     </div>
     </div>
     <div id="options">
+        <div>
+          <h3>Analytics</h3>
+          <em>Default analytics <a href="https://github.com/buren/climate-change-substitutions-analytics">implementation (GitHub)</a>.</em>
+          <br /><br />
+          <form id="analytics">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox"> I want to participate
+              </label>
+              <span class="help-block">
+                We're only sending the match &amp; replacement phrase and the URL, nothing else is tracked.
+              </span>
+            </div>
+            <div>
+                <input autocomplete="off" placeholder="URL analytics will be posted to" id="analytics-url" type="text" type="text" class="input form-control field">
+            </div>
+            <span class="help-block">
+              You can send analytics to a URL of your choosing.
+            </span>
+          </form>
+        </div>
         <div>
             <h3>Website Blacklist</h3>
             <p>While this extension tries not to affect things like login forms or emails, due to the complex nature of websites this cannot be guaranteed. So there is a way to stop this extension working on specific sites.</p>
